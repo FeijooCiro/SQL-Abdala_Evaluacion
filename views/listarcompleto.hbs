@@ -1,0 +1,25 @@
+<table border="1">
+  <tr>
+    <td>Id</td>
+    <td>Nombre</td>
+    <td>Apellido</td>
+    <td>Fecha de Nacimiento</td>
+    <td>Nacionaliodad</td>
+    <td>Mejor Obra</td>
+    <td>Año de Publicación</td>
+    <td>Edad en Publicación</td>
+  </tr>
+  {{#each autores}}
+  <tr>  
+    <td> {{idAutores}} </td> 
+    <td> {{nombre}} </td> 
+    <td> {{apellido}} </td>
+    <td> {{fechaNacimiento}} </td>
+    <td> {{nacionalidad}} </td>
+    <td> {{mejorObra}} </td>
+    <td> {{anioPublicacion}} </td>
+    <td> {{edadPublicacion}} </td>
+  </tr>   
+  {{/each}}
+</table>
+<a href="/">Retornar</a>
