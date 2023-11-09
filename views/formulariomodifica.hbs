@@ -1,0 +1,44 @@
+{{#each autores}}
+    <form method="post" action="/autores/confirmarmodifica">
+        Ingrese el nombre del autor:
+        <input type="text" name="nombre" size="50" value="{{nombre}}">
+
+        <br>
+
+        Ingrese el apellido del autor:
+        <input type="text" name="apellido" size="50" value="{{apellido}}">
+
+        <br>
+
+        Ingrese la fecha de nacimiento del autor:
+        <input type="date" name="fechaNacimiento" value="{{fechaNacimiento}}">
+
+        <br>
+
+        Ingrese la nacionalidad del autor:
+        <input type="text" name="nacionalidad" size="50" value="{{nacionalidad}}">
+
+        <br>
+
+        Ingrese la mejor obra del autor:
+        <input type="text" name="mejorObra" size="50" value="{{mejorObra}}">
+
+        <br>
+
+        Ingrese wel año de publicación de su mejor obra:
+        <input type="number" name="anioPublicacion" value="{{anioPublicacion}}">
+
+        <br>
+
+        Ingrese la edad que tenía el autor cuando publicó su mejor obra:
+        <input type="number" name="edadPublicacion" value="{{edadPublicacion}}">
+
+        <br>
+
+        <input type="hidden" name="idAutores" value="{{idAutores}}">  
+
+        <br>
+
+        <input type="submit" value="Modificar">
+    </form>
+{{/each}}

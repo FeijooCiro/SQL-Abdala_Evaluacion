@@ -99,4 +99,64 @@ router.get('/Promedio', function (req, res, next) {
     })
 })
 
+//Modificacion
+router.get('/modificacion', function (req, res, next) {
+    res.render('consultamodificacion')
+})
+
+router.post('/modificar', function (req, res, next) {
+    bd.query('SELECT nombre, apellido, fechaNacimiento, nacionalidad, mejorObra, anioPublicacion, edadPublicacion FROM autores WHERE idAutores=?', [req.body.idAutores], function (error, filas) {
+        if (error) {
+            console.log('Error en la consulta:', error)
+            return
+        }
+        if (filas.lenght > 0) {
+            res.render('formulariomodifica', { autores: filas })
+        } else {
+            res.render('mensaje', { mensaje: 'No existe el ID del autor ingresado.' })
+        }
+    })
+})
+
+router.post('/confirmarmodifica', function (req, res, next) {
+    const registro = {
+        nombre: req.body.nombre,
+        apellido: req.body.apellido,
+        fechaNacimiento: req.body.fechaNacimiento,
+        nacionalidad: req.body.nacionalidad,
+        mejorObra: req.body.mejorObra,
+        anioPublicacion: req.body.anioPublicacion,
+        edadPublicacion: req.body.edadPublicacion
+    }
+
+    console.log('ID del autor a actualizar:', req.body.idAutores)
+    bd.query('UPDATE autores SET ? WHERE idAutores = ?', [registro, parseInt({idAutores:req.body.idAutores})], function (error, resultados) {
+        if (error) {
+            console.log('Error en la consulta:', error)
+            res.status(500).send('Error en la consulta de actualización')
+            return
+        } 
+        res.render('mensaje', { mensaje: resultados.affectedRows > 0 ? 'Datos del autor actualizados correctamente.' : 'No se encontró el autor con la ID proporcionada.' })
+    })
+})
+
+//Eliminacion
+router.get('/eliminacion', function (req, res, next) {
+    res.render('consultaeliminacion')
+})
+
+router.post('/eliminar', function (req, res, next) {
+    bd.query('delete FROM autores WHERE idAutores = ?', [req.body.idAutores], function (error, filas) {
+        if (error) {
+            console.log('Error en la consulta:', error)
+            return
+        }
+        if (filas.affectedRows > 0) {
+            res.render('mensaje', { mensaje: 'Autor eliminado.' })
+        } else {
+            res.render('mensaje', { mensaje: 'No existe el ID del autor ingresado.' })
+        }
+    })
+})
+
 module.exports = router
